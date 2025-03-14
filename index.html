@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organiser</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Organiser</h1>
+    </header>
+
+    <main>
+        <section>
+            <h2>Add event</h2>
+            <form id="eventForm" action="/add_event" method="GET">
+                <label for="name">Event name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="date">Data (MM-DD):</label>
+                <input type="text" id="date" name="date" placeholder="01-01" required>
+
+                <button type="submit">Add</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Monthly events</h2>
+            <div id="eventsContainer">
+                {% for event in events %}
+                    <div class="event">
+                        <h3>{{ event['name'] }}</h3>
+                        <p>{{ event['date'].strftime('%m-%d') }}</p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+</body>
+</html>
